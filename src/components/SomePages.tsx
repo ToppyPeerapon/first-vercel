@@ -9,5 +9,5 @@ export default function SomePageComponent() {
 
   console.log(isOnline)
 
-  return <div>Some page :</div>
+  return <div>Some page : {isOnline}</div>
 }

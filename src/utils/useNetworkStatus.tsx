@@ -4,6 +4,7 @@ import axios from "axios"
 const intervalMs = 1000 * 10
 const url = "/api/ping"
 const timeout = 1000 * 60
+const retry = 1000 * 10
 
 export function useNetworkStatus() {
   const intervalRef = useRef<NodeJS.Timeout | null>(null)
@@ -29,12 +30,9 @@ export function useNetworkStatus() {
         }
       } catch (error: unknown) {
         console.log(error)
-        if (error instanceof Error && "response" in error) {
-          console.log("🛑 Network error, stopping ping")
-          setOnline(false)
-          stopPing()
-          waitForNetwork()
-        }
+        setOnline(false)
+        stopPing()
+        waitForNetwork()
       }
     }, intervalMs)
   }
@@ -51,7 +49,7 @@ export function useNetworkStatus() {
         setOnline(true)
         startPing()
       } catch {
-        setTimeout(tryReconnect, 3000) // ลองใหม่ทุก 3 วิ
+        setTimeout(tryReconnect, retry) // ลองใหม่ทุก 3 วิ
       }
     }
 
