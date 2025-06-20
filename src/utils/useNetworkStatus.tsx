@@ -21,10 +21,10 @@ export const useNetworkStatus = () => {
     window.addEventListener("online", updateNetworkStatus)
     window.addEventListener("offline", updateNetworkStatus)
 
-    return () => {
-      window.removeEventListener("online", updateNetworkStatus)
-      window.removeEventListener("offline", updateNetworkStatus)
-    }
+    // return () => {
+    //   window.removeEventListener("online", updateNetworkStatus)
+    //   window.removeEventListener("offline", updateNetworkStatus)
+    // }
   }, [])
 
   // Return true if still initializing (null), otherwise return actual status
