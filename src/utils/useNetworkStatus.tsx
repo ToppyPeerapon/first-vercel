@@ -28,6 +28,7 @@ export function useNetworkStatus() {
           setOnline(true)
         }
       } catch (error: unknown) {
+        console.log(error)
         if (error instanceof Error && "response" in error) {
           console.log("🛑 Network error, stopping ping")
           setOnline(false)
